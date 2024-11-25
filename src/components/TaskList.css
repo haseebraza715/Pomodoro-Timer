@@ -1,4 +1,4 @@
-/* Task Box Styling (Same as Timer Box for Consistency) */
+/* Task Box Styling (Match Timer Box Dimensions) */
 .task-box {
   background: linear-gradient(145deg, #333333, #1e1e1e);
   border-radius: 15px;
@@ -6,8 +6,13 @@
   box-shadow: 0 6px 15px rgba(0, 0, 0, 0.5);
   text-align: center;
   width: 100%;
-  max-width: 400px;
-  margin: 0 auto; /* Center the box */
+  max-width: 400px; /* Match Timer box width */
+  height: 519px; /* Match Timer box height */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin-top: 21px; /* Padding from the top of canvas */
+  align-self: flex-start; /* Align with the Timer box */
 }
 
 /* Task List Title */
@@ -170,7 +175,9 @@
 /* Responsive Adjustments */
 @media (max-width: 768px) {
   .task-box {
-    width: 90%; /* Decrease width for smaller screens */
+    width: 90%;
+    height: auto; /* Allow dynamic height */
+    margin-top: 20px;
   }
 
   .task-input input {
@@ -187,7 +194,8 @@
 @media (max-width: 480px) {
   .task-box {
     width: 100%; /* Adjust box width for very small screens */
-    padding: 20px 20px;
+    padding: 30px 20px;
+    height: auto;
   }
 
   .task-input input {
