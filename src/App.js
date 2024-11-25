@@ -18,6 +18,7 @@ const App = () => {
   });
   const [tasks, setTasks] = useState([]); // Array to store tasks
   const [sessionHistory, setSessionHistory] = useState([]); // Track session history
+  const [sessionCount, setSessionCount] = useState(0); // Unique count to avoid duplicates
 
   // **Task Management Functions**
   const addTask = (task) => {
@@ -83,31 +84,35 @@ const App = () => {
       setTimeLeft(newDurations.longBreakDuration);
   };
 
-  // **Timer Logic**
   const handleSessionEnd = useCallback(() => {
     const timestamp = new Date().toLocaleString(); // Record time of session end
-    if (sessionType === "Work") {
-      setCompletedWorkSessions((prev) => prev + 1);
-      setSessionHistory((prev) => [
-        ...prev,
-        { sessionType: "Work", timestamp },
-      ]);
 
-      // Transition logic: Long Break after 4 Work sessions, otherwise Short Break
-      if ((completedWorkSessions + 1) % 4 === 0) {
+    setSessionCount((prevCount) => prevCount + 1); // Increment unique session count
+    const sessionEntry = { sessionType, timestamp, id: sessionCount + 1 };
+
+    if (sessionType === "Work") {
+      setSessionHistory((prev) => [...prev, sessionEntry]);
+
+      // Check for Long Break after 4 Work sessions
+      if (completedWorkSessions % 4 === 3) {
+        setCompletedWorkSessions((prev) => prev + 1); // Increment completed work sessions
         setSessionType("Long Break");
         setTimeLeft(durations.longBreakDuration); // 15 minutes for Long Break
       } else {
+        setCompletedWorkSessions((prev) => prev + 1); // Increment completed work sessions
         setSessionType("Short Break");
         setTimeLeft(durations.shortBreakDuration); // 5 minutes for Short Break
       }
-    } else {
-      setSessionHistory((prev) => [...prev, { sessionType, timestamp }]);
-      setSessionType("Work");
-      setTimeLeft(durations.workDuration); // 25 minutes for Work
     }
-    setIsRunning(false); // Pause the timer after each session ends
-  }, [sessionType, durations, completedWorkSessions]);
+    // Handle Break Session Completion (Short or Long)
+    else {
+      setSessionHistory((prev) => [...prev, sessionEntry]);
+      setSessionType("Work"); // Return to Work after any break
+      setTimeLeft(durations.workDuration); // Reset Work duration
+    }
+
+    setIsRunning(false); // Pause the timer after the session ends
+  }, [sessionType, durations, completedWorkSessions, sessionCount]);
 
   useEffect(() => {
     let timer;
@@ -123,6 +128,7 @@ const App = () => {
         });
       }, 1000);
     }
+
     return () => clearInterval(timer); // Cleanup timer
   }, [isRunning, handleSessionEnd]);
 
@@ -138,6 +144,7 @@ const App = () => {
     setTimeLeft(durations.workDuration); // Use current Work duration
     setCompletedWorkSessions(0); // Reset completed Work sessions
     setSessionHistory([]); // Clear session history
+    setSessionCount(0); // Reset session count
   };
 
   // **Render App**

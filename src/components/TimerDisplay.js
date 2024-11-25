@@ -9,6 +9,7 @@ const TimerDisplay = ({
   completedWorkSessions,
   durations,
 }) => {
+  // Format time into MM:SS
   const formatTime = (time) => {
     const minutes = Math.floor(time / 60);
     const seconds = time % 60;
@@ -17,13 +18,13 @@ const TimerDisplay = ({
       .padStart(2, "0")}`;
   };
 
+  // Calculate progress for the circular progress bar
   const calculateProgress = () => {
-    // Ensure durations is valid and sessionType matches keys
     if (!durations || !durations[`${sessionType.toLowerCase()}Duration`]) {
       return 0; // Fallback to 0 if invalid
     }
     const totalDuration = durations[`${sessionType.toLowerCase()}Duration`];
-    return ((totalDuration - timeLeft) / totalDuration) * 100;
+    return Math.min(((totalDuration - timeLeft) / totalDuration) * 100, 100); // Ensure progress doesn't exceed 100%
   };
 
   return (
