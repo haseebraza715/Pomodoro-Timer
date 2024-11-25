@@ -186,7 +186,7 @@
 
 @media (max-width: 480px) {
   .task-box {
-    width: 95%; /* Adjust box width for very small screens */
+    width: 100%; /* Adjust box width for very small screens */
     padding: 30px 15px;
   }
 
