@@ -90,7 +90,7 @@
   }
 
   .circular-progress {
-    width: 140px; /* Adjust circular progress size */
-    height: 140px;
+    width: 100px; /* Adjust circular progress size */
+    height: 100px;
   }
 }

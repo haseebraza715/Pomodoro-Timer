@@ -106,7 +106,7 @@ button.save-button:active {
 /* Responsive adjustments for small phones */
 @media (max-width: 480px) {
   .settings {
-    padding: 20px 15px;
+    padding: 20px 24px;
     max-width: 100%; /* Fill the screen width */
   }
 
