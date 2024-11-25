@@ -35,6 +35,13 @@ const App = () => {
       )
     );
   };
+  const togglePriority = (index) => {
+    setTasks((prevTasks) =>
+      prevTasks.map((task, i) =>
+        i === index ? { ...task, priority: !task.priority } : task
+      )
+    );
+  };
 
   // **Load settings and completed sessions from localStorage**
   useEffect(() => {
@@ -134,6 +141,7 @@ const App = () => {
           addTask={addTask}
           deleteTask={deleteTask}
           completeTask={completeTask}
+          togglePriority={togglePriority}
         />
         <div className="timer-container">
           <TimerDisplay

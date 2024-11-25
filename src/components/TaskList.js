@@ -1,9 +1,16 @@
 import React, { useState } from "react";
 import "./TaskList.css";
-import { FaCheck, FaTrash } from "react-icons/fa";
+import { FaCheck, FaTrash, FaExclamation } from "react-icons/fa";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 
-const TaskList = ({ tasks, setTasks, addTask, deleteTask, completeTask }) => {
+const TaskList = ({
+  tasks,
+  setTasks,
+  addTask,
+  deleteTask,
+  completeTask,
+  togglePriority,
+}) => {
   const [newTask, setNewTask] = useState("");
 
   const handleAddTask = () => {
@@ -50,13 +57,24 @@ const TaskList = ({ tasks, setTasks, addTask, deleteTask, completeTask }) => {
                       <li
                         className={`task-item ${
                           task.completed ? "completed" : ""
-                        }`}
+                        } ${task.priority ? "high-priority" : ""}`}
                         ref={provided.innerRef}
                         {...provided.draggableProps}
                         {...provided.dragHandleProps}
                       >
                         <span className="task-text">{task.name}</span>
                         <div className="task-buttons">
+                          <button
+                            className="priority-button"
+                            onClick={() => togglePriority(index)}
+                            title={
+                              task.priority
+                                ? "Remove Priority"
+                                : "Mark as High Priority"
+                            }
+                          >
+                            <FaExclamation />
+                          </button>
                           <button
                             className="complete-button"
                             onClick={() => completeTask(index)}
