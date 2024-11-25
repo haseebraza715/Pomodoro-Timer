@@ -88,6 +88,11 @@
   color: #bbbbbb;
 }
 
+.task-item.dragging {
+  background-color: #333333;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.5);
+}
+
 /* Task Input Section */
 .task-input {
   display: flex;

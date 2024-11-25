@@ -108,6 +108,13 @@ const App = () => {
   const handleStart = () => {
     setIsRunning(true);
   };
+  // const markTaskCompleted = (index) => {
+  //   setTasks((prevTasks) =>
+  //     prevTasks.map((task, i) =>
+  //       i === index ? { ...task, completed: !task.completed } : task
+  //     )
+  //   );
+  // };
 
   // **Reset Timer**
   const handleReset = () => {
@@ -123,6 +130,7 @@ const App = () => {
       <div className="top-section">
         <TaskList
           tasks={tasks}
+          setTasks={setTasks} // Pass setTasks for reordering
           addTask={addTask}
           deleteTask={deleteTask}
           completeTask={completeTask}
