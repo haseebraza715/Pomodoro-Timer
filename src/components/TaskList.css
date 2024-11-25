@@ -1,0 +1,217 @@
+/* Task Box Styling (Same as Timer Box for Consistency) */
+.task-box {
+  background: linear-gradient(145deg, #333333, #1e1e1e);
+  border-radius: 15px;
+  padding: 40px 50px;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.5);
+  text-align: center;
+  width: 100%;
+  max-width: 400px;
+  margin: 0 auto; /* Center the box */
+}
+
+/* Task List Title */
+.task-list h2 {
+  font-size: 2rem;
+  color: #ffffff;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 20px;
+}
+
+/* Task Container with Scroll */
+.task-container {
+  max-height: 250px; /* Maximum height for scrolling */
+  overflow-y: auto;
+ 
+  padding-right: 10px; /* Prevent text clipping */
+}
+
+.task-container::-webkit-scrollbar {
+  width: 8px;
+}
+
+.task-container::-webkit-scrollbar-thumb {
+  background: #4caf50;
+  border-radius: 5px;
+}
+
+.task-container::-webkit-scrollbar-track {
+  background: #333333;
+}
+
+/* Task Items */
+.task-list ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.task-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #444444;
+  padding: 10px 15px;
+  border-radius: 8px;
+  margin-bottom: 10px;
+  color: #ffffff;
+  font-size: 1rem;
+  word-wrap: break-word; /* Handle long text */
+  white-space: pre-wrap; /* Wrap text properly */
+  overflow-wrap: break-word; /* Break long words */
+  transition: transform 0.2s ease, background-color 0.2s ease;
+}
+
+.task-item span {
+  flex: 1;
+  font-size: 1rem;
+  color: #f4f4f4;
+  word-wrap: break-word; /* Break long words */
+  word-break: break-word; /* Ensure compatibility with all browsers */
+  white-space: normal; /* Allow text to wrap */
+  overflow-wrap: anywhere; /* Break text at any point if needed */
+}
+
+
+
+
+.task-item:hover {
+  transform: scale(1.02);
+  background-color: #555555;
+}
+
+.task-item.completed {
+  text-decoration: line-through;
+  color: #bbbbbb;
+}
+
+/* Task Input Section */
+.task-input {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  flex-wrap: wrap; /* Wrap input and button for small screens */
+}
+
+.task-input input {
+  flex: 1;
+  padding: 10px;
+  font-size: 1rem;
+  border: 1px solid #555555;
+  border-radius: 8px;
+  background: #222222;
+  color: #ffffff;
+  outline: none;
+  width: 70%; /* Default width */
+}
+
+.task-input input::placeholder {
+  color: #bbbbbb;
+}
+
+.task-input button {
+  background-color: #4caf50;
+  color: white;
+  font-weight: bold;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.task-input button:hover {
+  background-color: #45a049;
+}
+
+.task-input button:active {
+  transform: scale(0.95);
+}
+
+/* Task Buttons (Complete/Delete) */
+.task-buttons {
+  display: flex;
+  gap: 10px;
+}
+
+.complete-button {
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 6px 10px;
+  font-size: 1.1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.complete-button:hover {
+  background-color: #45a049;
+}
+
+.delete-button {
+  background-color: #f44336;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 6px 10px;
+  font-size: 1.1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.delete-button:hover {
+  background-color: #d32f2f;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  .task-box {
+    width: 90%; /* Decrease width for smaller screens */
+  }
+
+  .task-input input {
+    font-size: 0.9rem;
+    width: 100%; /* Expand input field for small screens */
+  }
+
+  .task-buttons button {
+    padding: 5px 8px;
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .task-box {
+    width: 95%; /* Adjust box width for very small screens */
+    padding: 10px 15px; 
+    /* Adjust padding */
+    padding-bottom: -20px;
+  }
+
+  .task-input input {
+    padding: 8px;
+    font-size: 0.8rem;
+  }
+
+  .task-input button {
+    padding: 8px 12px;
+    font-size: 0.9rem;
+  }
+
+  .task-item {
+    flex-direction: column; /* Stack text and buttons */
+    align-items: flex-start; /* Align items to the left */
+  }
+
+  .task-buttons {
+    width: 100%;
+    justify-content: space-between;
+  }
+}

@@ -1,0 +1,101 @@
+/* Timer Box Styling (Shared Consistency with Task Box) */
+.timer-display {
+  background: linear-gradient(145deg, #333333, #1e1e1e);
+  border-radius: 15px;
+  padding: 40px 50px;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.5);
+  text-align: center;
+  width: 100%;
+  max-width: 400px;
+  margin: 20px auto; /* Center the box horizontally */
+  display: flex; /* Ensure inner content is centered */
+  flex-direction: column; /* Stack content vertically */
+  justify-content: center; /* Center content vertically */
+}
+
+/* Timer Title */
+.timer-display h1 {
+  font-size: 2rem;
+  color: #ffffff;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 20px;
+}
+
+/* Timer Countdown */
+.timer-display h2 {
+  font-size: 4rem;
+  color: #ffffff;
+  margin: 20px 0;
+  transition: all 0.3s ease;
+}
+
+/* Work Session Text */
+.work-sessions {
+  font-size: 1rem;
+  font-weight: 400;
+  color: #d3d3d3;
+  font-style: italic;
+  margin-top: 10px;
+}
+
+/* Circular Progress Bar Styling */
+.circular-progress-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 20px 0;
+}
+
+.circular-progress {
+  width: 200px; /* Set the size of the circular progress bar */
+  height: 200px;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  .timer-display {
+    width: 90%; /* Adjust width for tablets */
+    padding: 30px 20px;
+  }
+
+  .timer-display h1 {
+    font-size: 1.8rem;
+  }
+
+  .timer-display h2 {
+    font-size: 3.5rem;
+  }
+
+  .circular-progress {
+    width: 160px;
+    height: 160px;
+  }
+}
+
+@media (max-width: 480px) {
+  .timer-display {
+    width: 95%; /* Full width for mobile screens */
+    padding: 10px 15px;
+    
+    /* margin: 20px auto;  */
+    padding-left: 7px
+
+    
+    
+  }
+
+  .timer-display h1 {
+    font-size: 1.5rem;
+  }
+
+  .timer-display h2 {
+    font-size: 2rem;
+    margin: 15px 0;
+  }
+
+  .circular-progress {
+    width: 80px; /* Adjust circular progress size */
+    height: 80px;
+  }
+}

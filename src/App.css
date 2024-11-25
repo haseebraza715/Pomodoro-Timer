@@ -1,0 +1,314 @@
+/* General App Layout */
+.App {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  gap: 30px; /* Add spacing between sections */
+}
+
+/* Top Section: Tasks and Timer */
+.top-section {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 100px; /* Spacing between Tasks and Timer */
+  width: 100%;
+}
+
+/* Task and Timer Containers */
+.tasks-container,
+.timer-container {
+  flex: 1;
+  min-width: 300px;
+  max-width: 400px;
+  text-align: center;
+}
+
+/* Timer Controls */
+.timer-controls {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin-top: 20px;
+}
+
+.start-button,
+.reset-button {
+  padding: 10px 20px;
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: #fff;
+  background-color: #4caf50; /* Start button */
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.reset-button {
+  background-color: #f44336; /* Reset button */
+}
+
+.start-button:hover {
+  background-color: #45a049; /* Slightly darker green */
+}
+
+.reset-button:hover {
+  background-color: #d32f2f; /* Slightly darker red */
+}
+
+.start-button:active,
+.reset-button:active {
+  transform: scale(0.95); /* Button press animation */
+}
+
+/* Bottom Section: Customize Durations */
+.bottom-section {
+  width: 100%;
+  max-width: 600px;
+  margin-top: 20px;
+}
+
+/* Footer */
+.footer {
+  margin-top: 20px;
+  font-size: 1.2rem;
+  color: #ffffff;
+  text-align: center;
+  font-weight: bold;
+}
+
+/* Daily Summary Text */
+.daily-summary {
+  font-size: 1.2rem;
+  text-align: center;
+  color: #fff;
+  margin-top: 20px;
+}
+
+/* Task List Styling */
+.task-list {
+  flex: 1; /* Adjust size proportionally */
+  min-width: 300px;
+  max-width: 400px;
+  background: linear-gradient(145deg, #2e2e2e, #3a3a3a);
+  padding: 20px;
+  border-radius: 15px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5);
+}
+
+.task-list h2 {
+  font-size: 1.5rem;
+  color: #ffffff;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+/* Task Input Styles */
+.task-input {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 15px;
+}
+
+.task-input input {
+  flex: 1;
+  padding: 10px;
+  font-size: 1rem;
+  border: 1px solid #555555;
+  border-radius: 8px;
+  background: #222222;
+  color: #ffffff;
+}
+
+.task-input input::placeholder {
+  color: #bbbbbb;
+}
+
+.task-input button {
+  background-color: #4caf50;
+  color: white;
+  font-weight: bold;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.task-input button:hover {
+  background-color: #45a049;
+}
+
+.task-input button:active {
+  transform: scale(0.95);
+}
+
+/* Task Container with Scroll */
+.task-container {
+  max-height: 250px; /* Maximum height with scroll */
+  overflow-y: auto;
+  padding-right: 10px; /* Padding for scroll visibility */
+}
+
+.task-container::-webkit-scrollbar {
+  width: 8px;
+}
+
+.task-container::-webkit-scrollbar-thumb {
+  background: #4caf50;
+  border-radius: 5px;
+}
+
+.task-container::-webkit-scrollbar-track {
+  background: #333333;
+}
+
+/* Task Items */
+.task-list ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.task-list li {
+  background: #444444;
+  text-align: left;
+  padding: 10px 15px;
+  border-radius: 8px;
+  margin-bottom: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  color: #ffffff;
+  overflow: hidden; /* Prevent overflow */
+  transition: transform 0.2s ease, background-color 0.2s ease;
+}
+
+.task-list li:hover {
+  transform: scale(1.02);
+  background-color: #555555;
+}
+
+.task-list li.completed {
+  text-decoration: line-through;
+  color: #bbbbbb;
+}
+
+.task-item span {
+  flex: 1;
+  font-size: 1rem;
+  color: #f4f4f4;
+  word-wrap: break-word;
+  white-space: pre-wrap;
+}
+
+/* Task Buttons */
+.task-buttons {
+  display: flex;
+  gap: 10px;
+}
+
+.task-buttons button {
+  padding: 6px 12px;
+  font-size: 0.8rem;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.complete-button {
+  background-color: #4caf50;
+}
+
+.complete-button:hover {
+  background-color: #45a049;
+}
+
+.delete-button {
+  background-color: #f44336;
+}
+
+.delete-button:hover {
+  background-color: #d32f2f;
+}
+
+/* Timer Display */
+.timer-display {
+  flex: 1;
+  min-width: 300px;
+  max-width: 400px;
+  text-align: center;
+  background: linear-gradient(145deg, #333333, #1e1e1e);
+  border-radius: 15px;
+  padding: 40px 50px;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.5);
+}
+
+.timer-display h1 {
+  font-size: 2rem;
+  color: #f4f4f4;
+  margin-bottom: 10px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.timer-display h2 {
+  font-size: 4rem;
+  color: #f4f4f4;
+  margin-bottom: 20px;
+  transition: all 0.3s ease;
+}
+
+.work-sessions {
+  font-size: 1rem;
+  font-weight: 400;
+  color: #d3d3d3;
+  margin-top: 10px;
+  font-style: italic;
+}
+
+.progress-bar {
+  height: 10px;
+  width: 100%;
+  background-color: #444444;
+  border-radius: 5px;
+  margin-top: 15px;
+  overflow: hidden;
+}
+
+.progress {
+  height: 100%;
+  background-color: #4caf50;
+  width: 0%;
+  transition: width 0.5s ease;
+}
+
+/* Responsive Layout */
+@media (max-width: 768px) {
+  .top-section {
+    flex-direction: column;
+  }
+
+  .start-button,
+  .reset-button {
+    font-size: 1rem;
+    padding: 8px 15px;
+  }
+
+  .timer-controls {
+    gap: 10px;
+    padding-bottom: 45px;
+  }
+
+  .timer-display {
+    width: 90%;
+  }
+
+  .task-input input {
+    width: 60%;
+  }
+}

@@ -1,0 +1,36 @@
+@import url("https://fonts.googleapis.com/css2?family=Merriweather:wght@300;400;700&display=swap");
+
+/* Global container adjustments for responsiveness */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: "Merriweather", serif;
+  background: linear-gradient(
+    180deg,
+    #181818,
+    #121212
+  ); /* Subtle dark gradient */
+  color: #f5f5f5;
+}
+
+#root {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 20px;
+}
+
+/* Scrollbar Styling */
+/* ::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #007bff; /* Blue for scrollbar 
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #0056b3; /* Darker blue on hover 
+} */
