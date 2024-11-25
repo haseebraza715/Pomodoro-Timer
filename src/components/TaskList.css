@@ -23,7 +23,7 @@
 .task-container {
   max-height: 250px; /* Maximum height for scrolling */
   overflow-y: auto;
- 
+
   padding-right: 10px; /* Prevent text clipping */
 }
 
@@ -72,9 +72,6 @@
   white-space: normal; /* Allow text to wrap */
   overflow-wrap: anywhere; /* Break text at any point if needed */
 }
-
-
-
 
 .task-item:hover {
   transform: scale(1.02);
@@ -190,9 +187,7 @@
 @media (max-width: 480px) {
   .task-box {
     width: 95%; /* Adjust box width for very small screens */
-    padding: 10px 15px; 
-    /* Adjust padding */
-    padding-bottom: -20px;
+    padding: 30px 15px;
   }
 
   .task-input input {

@@ -75,14 +75,9 @@
 
 @media (max-width: 480px) {
   .timer-display {
-    width: 95%; /* Full width for mobile screens */
-    padding: 10px 15px;
-    
-    /* margin: 20px auto;  */
-    padding-left: 7px
-
-    
-    
+    width: 100%; /* Full width for mobile screens */
+    padding: 20px 15px;
+    margin: 20px auto; /* Center horizontally */
   }
 
   .timer-display h1 {
@@ -90,12 +85,12 @@
   }
 
   .timer-display h2 {
-    font-size: 2rem;
+    font-size: 3rem;
     margin: 15px 0;
   }
 
   .circular-progress {
-    width: 80px; /* Adjust circular progress size */
-    height: 80px;
+    width: 140px; /* Adjust circular progress size */
+    height: 140px;
   }
 }
