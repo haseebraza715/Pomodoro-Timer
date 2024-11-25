@@ -7,6 +7,14 @@
   gap: 30px; /* Add spacing between sections */
 }
 
+.main-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* Two columns for larger screens */
+  gap: 20px; /* Equal spacing between boxes */
+  width: 100%;
+  max-width: 1200px; /* Limit the width for larger screens */
+}
+
 /* Top Section: Tasks and Timer */
 .top-section {
   display: flex;
@@ -63,13 +71,23 @@
   transform: scale(0.95); /* Button press animation */
 }
 
-/* Bottom Section: Customize Durations */
+/* Bottom Section: Settings and Analytics */
 .bottom-section {
-  width: 100%;
-  max-width: 600px;
+  display: flex; /* Align Settings and Analytics side-by-side */
+  justify-content: space-between; /* Push Settings and Analytics apart */
+  align-items: flex-start; /* Align items at the top */
+  gap: 20px; /* Spacing between the two components */
+  width: 100%; /* Ensure it spans the full width */
+  max-width: 800px; /* Optional: Limit max width for the container */
   margin-top: 20px;
 }
 
+/* For individual components inside the bottom section */
+.settings-box,
+.analytics-box {
+  flex: 1; /* Take equal width for both components */
+  max-width: 48%; /* Optional: Prevent them from growing too wide */
+}
 /* Footer */
 .footer {
   margin-top: 20px;
@@ -287,10 +305,50 @@
   transition: width 0.5s ease;
 }
 
+.box {
+  background: linear-gradient(145deg, #2e2e2e, #3a3a3a);
+  border-radius: 15px;
+  padding: 40px;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.5);
+  text-align: center;
+  min-height: 250px; /* Set a consistent height for all boxes */
+}
+
+/* Title Styling for Each Box */
+.box h2 {
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: #ffffff;
+  margin-bottom: 20px;
+  text-transform: uppercase;
+}
+
+/* Ensure Task and Settings have the same dimensions */
+.task-box,
+.settings-box {
+  min-height: 250px;
+  max-width: 400px;
+}
+
+/* Ensure Timer and Analytics have the same dimensions */
+.timer-display,
+.analytics-box {
+  min-height: 250px;
+  max-width: 400px;
+}
+
 /* Responsive Layout */
 @media (max-width: 768px) {
   .top-section {
-    flex-direction: column;
+    flex-direction: column; /* Stack Task and Timer vertically */
+    align-items: center; /* Center the stacked components */
+
+    gap: 30px; /* Adjust spacing between stacked components */
+  }
+
+  .task-box,
+  .timer-display {
+    width: 90%; /* Full width for smaller screens */
   }
 
   .start-button,
@@ -301,14 +359,71 @@
 
   .timer-controls {
     gap: 10px;
-    padding-bottom: 45px;
+    padding-bottom: 30px; /* Add space below buttons */
   }
 
-  .timer-display {
-    width: 90%;
+  .bottom-section {
+    flex-direction: column; /* Stack Settings and Analytics vertically */
+    align-items: center; /* Center the stacked components */
+    gap: 30px; /* Space between stacked components */
+    width: 100%;
   }
 
-  .task-input input {
-    width: 60%;
+  .settings-box,
+  .analytics-box {
+    width: 90%; /* Full width for smaller screens */
+    max-width: none; /* Remove max-width to allow full screen usage */
+  }
+  .main-grid {
+    grid-template-columns: 1fr; /* Single column layout for smaller screens */
+    gap: 20px; /* Adjust spacing */
+  }
+
+  .box {
+    width: 100%; /* Full width for smaller screens */
+    margin: 0 auto; /* Center the boxes */
+  }
+  .footer {
+    font-size: 1rem;
+    margin-top: 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .top-section {
+    gap: 20px; /* Reduce spacing for very small screens */
+  }
+
+  .task-box,
+  .timer-display,
+  .settings-box,
+  .analytics-box {
+    width: 100%; /* Full screen width for extra small screens */
+    padding: 20px; /* Add inner padding for better spacing */
+  }
+
+  .timer-controls {
+    gap: 8px;
+    padding-bottom: 20px; /* Reduce padding below buttons */
+  }
+
+  .start-button,
+  .reset-button {
+    font-size: 0.9rem;
+    padding: 6px 12px;
+  }
+
+  main-grid {
+    grid-template-columns: 1fr; /* Single column layout for extra small screens */
+    gap: 15px; /* Reduce spacing */
+  }
+
+  .box {
+    width: 100%; /* Take full screen width */
+    padding: 15px;
+  }
+
+  .footer {
+    font-size: 0.9rem;
   }
 }

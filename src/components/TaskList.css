@@ -2,7 +2,7 @@
 .task-box {
   background: linear-gradient(145deg, #333333, #1e1e1e);
   border-radius: 15px;
-  padding: 40px 50px;
+  padding: 60px 43px;
   box-shadow: 0 6px 15px rgba(0, 0, 0, 0.5);
   text-align: center;
   width: 100%;
@@ -223,7 +223,7 @@
 @media (max-width: 480px) {
   .task-box {
     width: 100%; /* Adjust box width for very small screens */
-    padding: 30px 20px;
+    padding: 20px 30px;
     height: auto;
   }
 

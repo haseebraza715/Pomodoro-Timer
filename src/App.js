@@ -3,6 +3,7 @@ import "./App.css"; // Global CSS
 import TimerDisplay from "./components/TimerDisplay"; // Timer Component
 import Settings from "./components/Settings"; // Settings Component
 import TaskList from "./components/TaskList";
+import Analytics from "./components/Analytics"; // Analytics Component
 
 const App = () => {
   // **State Variables**
@@ -16,16 +17,18 @@ const App = () => {
     longBreakDuration: 900, // 15 minutes in seconds
   });
   const [tasks, setTasks] = useState([]); // Array to store tasks
-  const [currentTaskIndex, setCurrentTaskIndex] = useState(null); // Index of the current task
+  const [sessionHistory, setSessionHistory] = useState([]); // Track session history
 
   // **Task Management Functions**
   const addTask = (task) => {
-    setTasks((prevTasks) => [...prevTasks, { name: task, completed: false }]);
+    setTasks((prevTasks) => [
+      ...prevTasks,
+      { name: task, completed: false, priority: false },
+    ]);
   };
 
   const deleteTask = (index) => {
     setTasks((prevTasks) => prevTasks.filter((_, i) => i !== index));
-    if (currentTaskIndex === index) setCurrentTaskIndex(null);
   };
 
   const completeTask = (index) => {
@@ -35,6 +38,7 @@ const App = () => {
       )
     );
   };
+
   const togglePriority = (index) => {
     setTasks((prevTasks) =>
       prevTasks.map((task, i) =>
@@ -43,26 +47,31 @@ const App = () => {
     );
   };
 
-  // **Load settings and completed sessions from localStorage**
+  // **Load settings and session history from localStorage**
   useEffect(() => {
     const savedDurations = JSON.parse(localStorage.getItem("durations"));
     const savedCompletedSessions = JSON.parse(
       localStorage.getItem("completedSessions")
     );
+    const savedSessionHistory = JSON.parse(
+      localStorage.getItem("sessionHistory")
+    );
 
     if (savedDurations) setDurations(savedDurations);
     if (savedCompletedSessions)
       setCompletedWorkSessions(savedCompletedSessions);
+    if (savedSessionHistory) setSessionHistory(savedSessionHistory);
   }, []);
 
-  // **Save settings and completed sessions to localStorage**
+  // **Save settings and session history to localStorage**
   useEffect(() => {
     localStorage.setItem("durations", JSON.stringify(durations));
     localStorage.setItem(
       "completedSessions",
       JSON.stringify(completedWorkSessions)
     );
-  }, [durations, completedWorkSessions]);
+    localStorage.setItem("sessionHistory", JSON.stringify(sessionHistory));
+  }, [durations, completedWorkSessions, sessionHistory]);
 
   // **Handle Settings Save**
   const handleSaveSettings = (newDurations) => {
@@ -76,8 +85,14 @@ const App = () => {
 
   // **Timer Logic**
   const handleSessionEnd = useCallback(() => {
+    const timestamp = new Date().toLocaleString(); // Record time of session end
     if (sessionType === "Work") {
       setCompletedWorkSessions((prev) => prev + 1);
+      setSessionHistory((prev) => [
+        ...prev,
+        { sessionType: "Work", timestamp },
+      ]);
+
       // Transition logic: Long Break after 4 Work sessions, otherwise Short Break
       if ((completedWorkSessions + 1) % 4 === 0) {
         setSessionType("Long Break");
@@ -87,7 +102,7 @@ const App = () => {
         setTimeLeft(durations.shortBreakDuration); // 5 minutes for Short Break
       }
     } else {
-      // Break session (Short or Long) ends -> Return to Work
+      setSessionHistory((prev) => [...prev, { sessionType, timestamp }]);
       setSessionType("Work");
       setTimeLeft(durations.workDuration); // 25 minutes for Work
     }
@@ -115,13 +130,6 @@ const App = () => {
   const handleStart = () => {
     setIsRunning(true);
   };
-  // const markTaskCompleted = (index) => {
-  //   setTasks((prevTasks) =>
-  //     prevTasks.map((task, i) =>
-  //       i === index ? { ...task, completed: !task.completed } : task
-  //     )
-  //   );
-  // };
 
   // **Reset Timer**
   const handleReset = () => {
@@ -129,21 +137,27 @@ const App = () => {
     setSessionType("Work"); // Reset to Work session
     setTimeLeft(durations.workDuration); // Use current Work duration
     setCompletedWorkSessions(0); // Reset completed Work sessions
+    setSessionHistory([]); // Clear session history
   };
 
   // **Render App**
   return (
     <div className="App">
-      <div className="top-section">
-        <TaskList
-          tasks={tasks}
-          setTasks={setTasks} // Pass setTasks for reordering
-          addTask={addTask}
-          deleteTask={deleteTask}
-          completeTask={completeTask}
-          togglePriority={togglePriority}
-        />
-        <div className="timer-container">
+      <div className="main-grid">
+        {/* Tasks */}
+        <div className="box">
+          <TaskList
+            tasks={tasks}
+            setTasks={setTasks}
+            addTask={addTask}
+            deleteTask={deleteTask}
+            completeTask={completeTask}
+            togglePriority={togglePriority}
+          />
+        </div>
+
+        {/* Work Timer */}
+        <div className="box">
           <TimerDisplay
             timeLeft={timeLeft}
             sessionType={sessionType}
@@ -159,10 +173,18 @@ const App = () => {
             </button>
           </div>
         </div>
+
+        {/* Settings */}
+        <div className="box">
+          <Settings onSave={handleSaveSettings} />
+        </div>
+
+        {/* Analytics */}
+        <div className="box">
+          <Analytics sessionHistory={sessionHistory} />
+        </div>
       </div>
-      <div className="bottom-section">
-        <Settings onSave={handleSaveSettings} />
-      </div>
+
       <div className="footer">
         <p>Today's Completed Sessions: {completedWorkSessions}</p>
       </div>
